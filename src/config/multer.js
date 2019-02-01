@@ -17,9 +17,6 @@ const storageTypes = {
       });
     }
   }),
-  limits: {
-    fileSize: 2 * 1024 * 1024
-  },
   s3: multerS3({
     s3: new aws.S3(),
     bucket: "upload-rocketseat",
@@ -38,6 +35,9 @@ const storageTypes = {
 module.exports = {
   dest: path.resolve(__dirname, "..", "..", "tmp", "uploads"),
   storage: storageTypes[process.env.STORAGE_TYPE],
+  limits: {
+    fileSize: 2 * 1024 * 1024
+  },
   fileFilter: (req, file, cb) => {
     const allowedMimes = [
       "image/jpeg",
